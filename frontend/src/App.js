@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import MenuSet from './Container/MenuSet'
+import Schedule from './Container/Schedule'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+
+    const [from, setFrom] = useState('南港')
+    const [to, setTo] = useState('左營')
+    let now = new Date()
+    const [date, setDate] = useState(now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate())
+    console.log(date);
+    const [time, setTime] = useState('13:30')
+    const [check, setCheck] = useState(false)
+
+    return <>
+        <MenuSet setFrom={setFrom} setTo={setTo} setTime={setTime} setDate={setDate} setCheck={setCheck}/>
+        {check?<Schedule from={from} to={to} date={date} time={time}/>:<></>}
+    </>
+
 }
 
-export default App;
+export default App
