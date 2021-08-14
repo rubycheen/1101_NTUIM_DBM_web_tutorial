@@ -14,3 +14,11 @@ python manage.py runserver #啟用後端server
 >POST /timetable/search
 
 >POST /ticket/search
+
+
+## Database
+
+下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/)(GUI介面)
+
+* [Postgres setup on MacOS](https://www.youtube.com/watch?v=EZAa0LSxPPU)
+* [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
