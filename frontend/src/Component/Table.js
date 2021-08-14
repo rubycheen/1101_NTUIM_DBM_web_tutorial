@@ -1,22 +1,24 @@
 import { Table } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const Tab = ({ from, to, date, time }) => {
   const [tabel, setTable] = useState([])
 
-  axios.post('http://127.0.0.1:8000/api/timetable/search', {
-    "StartStation": from,
-    "EndStation": to,
-    "OutWardSearchDate": date,
-    "OutWardSearchTime": time
-  })
-  .then((res) => { 
-    setTable(res.data)
-  })
-  .catch((error) => { console.log(error) })
+  useEffect(() => {
+    axios.post('http://127.0.0.1:8000/api/timetable/search', {
+      "StartStation": from,
+      "EndStation": to,
+      "OutWardSearchDate": date,
+      "OutWardSearchTime": time
+    })
+    .then((res) => { 
+      setTable(res.data)
+    })
+    .catch((error) => { console.log(error) })
+  },[])
 
   const columns = [
     {

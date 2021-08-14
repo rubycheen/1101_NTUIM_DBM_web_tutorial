@@ -1,20 +1,22 @@
 import { Table } from 'antd';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Fare = ({ from, to, date }) => {
 
   const [fare, setFare] = useState([])
 
-  axios.post('http://127.0.0.1:8000/api/ticket/search', {
-    "StartStation": from,
-    "EndStation": to,
-    "OutWardSearchDate": date
-  })
-  .then((res) => { 
-    setFare(res.data)
-  })
-  .catch((error) => { console.log(error) })
+  useEffect(() => {
+    axios.post('http://127.0.0.1:8000/api/ticket/search', {
+      "StartStation": from,
+      "EndStation": to,
+      "OutWardSearchDate": date
+    })
+    .then((res) => { 
+      setFare(res.data)
+    })
+    .catch((error) => { console.log(error) })
+  },[])
 
   const columns = [
     {
