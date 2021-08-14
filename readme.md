@@ -1,3 +1,10 @@
+## Frontend
+```shell
+cd frontend
+yarn start
+```
+
+
 ## Backend 
 ```shell
 cd backend

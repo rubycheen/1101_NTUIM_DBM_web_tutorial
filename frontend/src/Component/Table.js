@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-
+import axios from 'axios';
 
 
 const columns = [
@@ -47,6 +47,7 @@ const columns = [
 ];
 
 /* 打API */
+
 const data = [
   {
     key: '1',
@@ -76,6 +77,15 @@ const data = [
     undergraduate: true
   },
 ];
+
+axios.post('http://127.0.0.1:8000/timetable/search', {
+  "StartStation": "南港",
+  "EndStation": "左營",
+  "OutWardSearchDate": "2021/08/12",
+  "OutWardSearchTime": "12:30"
+})
+.then((res) => { console.log('table',res.data) })
+.catch((error) => { console.log(error) })
 
 const Tab = () => {
     return <Table columns={columns} dataSource={data} />
