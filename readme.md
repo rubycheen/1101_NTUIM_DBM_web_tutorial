@@ -1,5 +1,6 @@
 ## Backend 
 ```shell
+cd backend
 source env/bin/activate #啟動虛擬環境(已裝好套件)
 python manage.py runserver #啟用後端server
 ```
