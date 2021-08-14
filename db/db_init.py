@@ -64,7 +64,7 @@ fare.insert(3, 'standard_fare', [row[1]['Price'] for row in pd.DataFrame(ODFare)
 fare.insert(4, 'non_reserved_fare', [row[2]['Price'] for row in pd.DataFrame(ODFare)['Fares']])
 fare = fare.rename(columns={"OriginStationID": "origin_station_id", "DestinationStationID": "destination_station_id"})
 
-# table: schedule
+# table: discount
 temp = {'type': ['concession', 'group', 'early_bird', 'undergraduate'],
         'discount_rate': [0.5, 0.95, 0.8, 0.75]}
 discount = pd.DataFrame(temp)
