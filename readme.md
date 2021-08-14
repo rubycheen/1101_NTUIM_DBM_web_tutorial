@@ -9,6 +9,10 @@ yarn start
 ```shell
 cd backend
 source env/bin/activate #啟動虛擬環境(已裝好套件)
+pip install django
+pip install djangorestframework
+pip install psycopg2 #pip install psycopg2-binary
+python -m pip install django-cors-headers #允許前端port3000的請求
 python manage.py runserver #啟用後端server
 ```
 
