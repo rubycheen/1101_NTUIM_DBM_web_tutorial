@@ -12,7 +12,6 @@ const Stations = ({ setFrom, setTo, setCheck }) => {
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/stations')
         .then((res) => { 
-          // stations = res.data
           setStations(res.data)
         })
         .catch((error) => { console.log(error) })

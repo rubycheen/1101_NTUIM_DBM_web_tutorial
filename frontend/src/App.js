@@ -9,7 +9,6 @@ const App = () => {
     const [to, setTo] = useState('左營')
     let now = new Date()
     const [date, setDate] = useState(now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate())
-    console.log(date);
     const [time, setTime] = useState('13:30')
     const [check, setCheck] = useState(false)
 

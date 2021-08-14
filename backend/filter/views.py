@@ -67,11 +67,12 @@ def timetable_search(request):
 
         result = []
         for _id, (start, end) in enumerate(zip(schedules[::2], schedules[1::2]), start=1):
+            
             data = {'key': _id}
             
             start_time = datetime.datetime.strptime(start['departure_time'], '%H:%M')
             end_time = datetime.datetime.strptime(end['arrival_time'], '%H:%M')
-            spend = (end_time - start_time).seconds//60
+            spend = (end_time - start_time).seconds // 60
             current_time = datetime.datetime.now()
 
             data['startTime'] = start['departure_time']
@@ -116,11 +117,11 @@ def ticket_search(request):
             data = {}
             data['key'] = _id
             data['type'] = category_name[category]
-            data['full'] = fare
-            data['discount'] = fare * discount_rates['concession']
-            data['earlyBird'] = fare * discount_rates['early_bird']
-            data['undergraduate'] = fare * discount_rates['undergraduate']
-            data['group'] = fare * discount_rates['group']
+            data['full'] = int(fare)
+            data['discount'] = int(fare * discount_rates['concession'])
+            data['earlyBird'] = int(fare * discount_rates['early_bird'])
+            data['undergraduate'] = int(fare * discount_rates['undergraduate'])
+            data['group'] = int(fare * discount_rates['group'])
             result.append(data)
         
         return Response(result, status=status.HTTP_200_OK)

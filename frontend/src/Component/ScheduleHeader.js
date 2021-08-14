@@ -2,7 +2,7 @@ import { Space } from 'antd'
 import { DoubleRightOutlined } from '@ant-design/icons';
 
 
-const ScheduleHeader = ({from, to, date, time}) => {
+const ScheduleHeader = ({ from, to, date, time }) => {
     return(
         <div className='schedule'>
             <Space className='schedule-header'>
