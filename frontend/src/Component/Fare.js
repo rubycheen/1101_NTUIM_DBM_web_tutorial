@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import axios from 'axios';
 
 const columns = [
     {
@@ -32,42 +33,23 @@ const columns = [
         key: 'group',
       },
   ];
-  
-  /* 打API */
-  const data = [
-    {
-      key: '1',
-      type: '標準車廂',
-      full: 1024,
-      discount: 512,
-      earlyBird: 800,
-      undergraduate: 700,
-      group: 822,
-    },
-    {
-      key: '2',
-      type: '商務車廂',
-      full: 2048,
-      discount: 1024,
-      earlyBird: 900,
-      undergraduate: 800,
-      group: 933,
-    },
-    {
-      key: '3',
-      type: '自由座車廂',
-      full: 909,
-      discount: 455,
-      earlyBird: 750,
-      undergraduate: 750,
-      group: 830,
-    },
-  ];
+
+  let fare = []
+
+  axios.post('http://127.0.0.1:8000/api/ticket/search', {
+    "StartStation": "南港",
+    "EndStation": "左營",
+    "OutWardSearchDate": "2021/08/30"
+  })
+  .then((res) => { 
+    fare = res.data
+  })
+  .catch((error) => { console.log(error) })
 
 const Fare = () => {
     return <>
         <h2>車廂票價參考</h2>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={fare} />
     </>
 }
 

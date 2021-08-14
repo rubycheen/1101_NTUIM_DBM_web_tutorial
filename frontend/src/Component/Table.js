@@ -46,49 +46,21 @@ const columns = [
   },
 ];
 
-/* 打API */
+let tabel = []
 
-const data = [
-  {
-    key: '1',
-    startTime: '20:00',
-    timeSpend: 32,
-    arrivalTime: '20:32',
-    number: 522,
-    earlyBird: true,
-    undergraduate: false
-  },
-  {
-    key: '2',
-    startTime: '20:10',
-    timeSpend: 42,
-    arrivalTime: '20:52',
-    number: 833,
-    earlyBird: true,
-    undergraduate: true
-  },
-  {
-    key: '3',
-    startTime: '20:20',
-    timeSpend: 32,
-    arrivalTime: '20:52',
-    number: 333,
-    earlyBird: false,
-    undergraduate: true
-  },
-];
-
-axios.post('http://127.0.0.1:8000/timetable/search', {
+axios.post('http://127.0.0.1:8000/api/timetable/search', {
   "StartStation": "南港",
   "EndStation": "左營",
-  "OutWardSearchDate": "2021/08/12",
+  "OutWardSearchDate": "2021/08/30",
   "OutWardSearchTime": "12:30"
 })
-.then((res) => { console.log('table',res.data) })
+.then((res) => { 
+  tabel = res.data
+})
 .catch((error) => { console.log(error) })
 
 const Tab = () => {
-    return <Table columns={columns} dataSource={data} />
+    return <Table columns={columns} dataSource={tabel} />
 }
 
 export default Tab

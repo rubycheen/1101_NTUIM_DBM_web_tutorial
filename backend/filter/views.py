@@ -71,7 +71,7 @@ def timetable_search(request):
             
             start_time = datetime.datetime.strptime(start['departure_time'], '%H:%M')
             end_time = datetime.datetime.strptime(end['arrival_time'], '%H:%M')
-            spend = ((end_time - start_time).seconds//60)%60
+            spend = (end_time - start_time).seconds//60
             current_time = datetime.datetime.now()
 
             data['startTime'] = start['departure_time']
@@ -79,7 +79,7 @@ def timetable_search(request):
             data['timeSpend'] = spend
             data['number'] = start['train_id']
 
-            if(current_time - search_time > datetime.timedelta(days=5)):
+            if(search_time - current_time > datetime.timedelta(days=5)):
                 data['earlyBird'] = True
             else:
                 data['earlyBird'] = False
