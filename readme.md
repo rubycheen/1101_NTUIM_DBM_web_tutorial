@@ -1,6 +1,6 @@
-## 使用說明
+# 使用說明
 
-#### Backend 
+## Backend 
 ```shell
 cd backend
 source env/bin/activate #啟動虛擬環境 for mac
@@ -18,13 +18,13 @@ python manage.py runserver #啟用後端server
 ```
 
 
-#### Frontend
+## Frontend
 ```shell
 cd frontend
 yarn start
 ```
 
-#### Database
+## Database
 
 下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/)(GUI介面)
 
@@ -32,7 +32,7 @@ yarn start
 * [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
 
 
-## API
+# API
 - **討論文件**：[連結](https://hackmd.io/_vPVxhaGRT6TIeWEMzvgWA)
 - **API endpoint**: http://127.0.0.1:8000/api
 - **三個接口**
@@ -44,7 +44,7 @@ yarn start
 
 
 ## Tutorial
-###  Backend
+##  Backend
 
 ### 後端架構
 ```
@@ -68,7 +68,7 @@ yarn start
     |   |-- wsgi.py
 ```
 
-#### 模型定義 filter/models.py
+### 模型定義 filter/models.py
 ```
 class Fare(models.Model):
     # Fields
@@ -88,14 +88,14 @@ class Fare(models.Model):
         return '{start}2{end}_fare'.format(start=origin_station, end=destination_station)
 ```
 
-###### Field 欄位
+#### Field 欄位
 設定欄位資料類型、參數、限制式等等。命名習慣為小寫加底線。
 
-###### 常見欄位資料類型
+#### 常見欄位資料類型
 `CharField`, `TextField`, `IntegerField`, `DateField`, `DateTimeField`, `EmailField`, `FileField`, `ImageField`, `AutoField`, `ForeignKey`, `ManyToManyField` ... 
 [官方文件](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types)
 
-###### 常見欄位參數
+#### 常見欄位參數
 - default :該欄位的默認值。
 - null : 如為 `True`，即允許 Django 於資料庫該欄位寫入 `NULL`（但欄位型態如為 CharField 則會寫入空字串）。預設值是 `False`。
 - blank: 如為 `True`，即允許該欄位的值允許空白。
@@ -104,22 +104,22 @@ class Fare(models.Model):
 - ...(略)
 [官方文件](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-options)
 
-###### Metadata 元數據
+#### Metadata 元數據
 Metadata 的意思是「描述其他數據的數據（data about data）」。常見的 meta option 有：
 -  db_table: 對應到資料庫的資料表名稱。（如果想要將現有資料庫自動轉成 Django 模型請見：[官方說明](https://docs.djangoproject.com/en/3.2/howto/legacy-databases/)）
 - ordering: 查詢時預設的排序方式。例如 `ordering = ['business_fare', '-standard_fare']` 就會先升冪排商務車廂票價再降冪排標準車廂票價.
 [官方文件](https://docs.djangoproject.com/en/3.2/ref/models/options/)
 
-###### Methods 方法
+#### Methods 方法
 最起碼，在每個模型中，你應該定義標準的Python 類方法[__str__()](https://docs.python.org/3/reference/datamodel.html#object.__str__) ，來為每個物件返回一個人類可讀的字符串。這是 Python 用來把物件轉換成 str 的 hook；因為做網站時，常常需要把東西變成字串，所以這會很方便。
 
 
-#### 視圖 filter/views.py
+### 視圖 filter/views.py
 
 當 Django 收到一個 HTTP request 時，會首先確認該 request 的 URI 應該對應到哪個 view（如果對應不到，直接回傳 404 Not Found），並把 request 交給它。View 要負責處理這個 request，並回傳一個 HTTP response。
 
 ![](./img/django_structure.png)
 
-#### 定義資源 filter/urls.py
+### 定義資源 filter/urls.py
 
-#### 定義資源 filter/serializers.py
+### 定義資源 filter/serializers.py
