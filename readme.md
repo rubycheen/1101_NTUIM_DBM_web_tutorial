@@ -47,6 +47,7 @@ yarn start
 ###  Backend
 
 ### 後端架構
+```
 |-- backend
     |-- manage.py
     |-- env
@@ -65,6 +66,7 @@ yarn start
     |   |-- settings.py
     |   |-- urls.py
     |   |-- wsgi.py
+```
 
 #### 模型定義 filter/models.py
 ```
