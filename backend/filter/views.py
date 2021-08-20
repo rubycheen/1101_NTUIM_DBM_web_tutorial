@@ -26,7 +26,6 @@ def station_list(request):
 
 @api_view(['POST'])
 def timetable_search(request):
-    
     if request.method == 'POST':
         start_ = request.data['StartStation']
         end_ = request.data['EndStation']

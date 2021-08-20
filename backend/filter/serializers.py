@@ -6,27 +6,14 @@ class StationListSerializer(serializers.ModelSerializer):
         model = Station
         fields = '__all__'
 
-# class DiscountSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Discount
-#         fields = '__all__'
+# class TimetableSearchSerializer(serializers.serializer):
+#     start_station = serializers.CharField(max_length=100)
+#     end_station = serializers.CharField(max_length=100)
+#     outward_search_date = serializers.CharField(max_length=100)
+#     outward_search_time = serializers.CharField(max_length=100)
 
-# class FareSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Fare
-#         fields = '__all__'
-
-# class ScheduleSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Schedule
-#         fields = '__all__'
-
-# class StationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Station
-#         fields = '__all__'
-
-# class TrainSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Train
-#         fields = '__all__'
+#     def validate(self, data):
+#         """
+#         Check search time is after current time
+#         """
+#         search_time = 

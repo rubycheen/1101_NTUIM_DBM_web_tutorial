@@ -1,5 +1,5 @@
 """
-WSGI config for THSRproject project.
+WSGI config for THSR project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'THSRproject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'THSR.settings')
 
 application = get_wsgi_application()

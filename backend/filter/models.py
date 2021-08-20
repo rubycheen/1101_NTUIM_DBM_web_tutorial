@@ -16,10 +16,13 @@ class Discount(models.Model):
     class Meta:
         db_table = 'discount'
 
+    def __str__(self):
+        return self.type
+
 
 class Fare(models.Model):
     fare_id = models.AutoField(primary_key=True)
-    origin_station = models.ForeignKey('Station', on_delete=models.CASCADE, related_name='origin') #on_delete 代表的是當對應的類別被刪除之後，這些對應到別人的資料要怎麼被處理，而 CASCADE 就是一倂刪除
+    origin_station = models.ForeignKey('Station', on_delete=models.CASCADE, related_name='origin')
     destination_station = models.ForeignKey('Station', on_delete=models.CASCADE, related_name='destination') #related_name是為了解決reverse accessor的錯誤
     business_fare = models.FloatField()
     standard_fare = models.FloatField()
@@ -27,6 +30,9 @@ class Fare(models.Model):
 
     class Meta:
         db_table = 'fare'
+
+    def __str__(self):
+        return f'{self.origin_station}2{self.destination_station}_fare'
 
 
 class Schedule(models.Model):
@@ -40,6 +46,9 @@ class Schedule(models.Model):
     class Meta:
         db_table = 'schedule'
 
+    def __str__(self):
+        return f'{self.train}_{self.station}'
+
 
 class Station(models.Model):
     station_id = models.TextField(primary_key=True)
@@ -47,12 +56,15 @@ class Station(models.Model):
 
     class Meta:
         db_table = 'station'
+    
+    def __str__(self):
+        return self.station_name
 
 
 class Train(models.Model):
     train_id = models.TextField(primary_key=True)
-    starting_station = models.ForeignKey(Station, on_delete=models.CASCADE,related_name='starting')
-    ending_station = models.ForeignKey(Station, on_delete=models.CASCADE,related_name='ending')
+    starting_station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='starting')
+    ending_station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='ending')
     mon = models.BooleanField()
     tue = models.BooleanField()
     wed = models.BooleanField()
@@ -63,3 +75,6 @@ class Train(models.Model):
 
     class Meta:
         db_table = 'train'
+
+    def __str__(self):
+        return f'{self.starting_station}2{self.ending_station}_train_info'
