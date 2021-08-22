@@ -3,18 +3,21 @@
 ## Backend 
 ```shell
 cd backend
-source env/bin/activate #啟動虛擬環境 for mac
-venv/lunch/Scripts/activate.bat #啟動虛擬環境 for windows
+python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
+source tutorial-env/bin/activate #啟動虛擬環境 for mac
+tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
-成功的話，command prompt 前面應該會多出 (lunch) 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 deactivate。接著輸入所需套件。
+成功的話，command prompt 前面應該會多出 `(tutorial-env)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 deactivate。接著輸入所需套件，需要的套件與版本已定義在 `requirements.txt`，因此僅需要需入一行指令。
 
 ```shell
-pip install django
-pip install djangorestframework
-pip install psycopg2 #python module for PostgreSQL
-python -m pip install django-cors-headers #允許前端port3000的請求
-python manage.py runserver #啟用後端server
+pip install -r requirements.txt
+```
+
+安裝完套件就可以啟動 server。
+
+```shell
+python manage.py runserver
 ```
 
 
@@ -67,6 +70,19 @@ yarn start
     |   |-- urls.py
     |   |-- wsgi.py
 ```
+
+### 安裝套件
+- `django`: python web 應用框架
+- `djangorestframework`:  Django 方便建立 REST API 功能的工具組。
+- `psycopg2`: python module for PostgreSQL
+- `python-decouple`: 將 config 和 code 分開的好用工具。
+- `dj-database-url`: configure "DATABASE_URL" environment variable
+- `django-cors-headers`: 允許前端port3000的請求
+
+> Q. 可以不用 djangorestframework 嗎？ A. 可以。
+
+> Django 本身也可以做 API，純用 Django 來做的話得自己處理 csrf 問題、資料驗證問題、身份驗證問題、權限問題等等的。用 djangorestframework 的好處是，他把 API 的處理流程，也就是上面提到的這些都歸納為一個 pattern、一個統一的處理流程，只要把該填的、該客製化的部份填上去，一個 API 就完成了。
+
 
 ### 模型定義 filter/models.py
 ```

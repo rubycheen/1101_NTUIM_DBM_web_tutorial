@@ -17,5 +17,5 @@ Including another URLconf
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url('api/', include('filter.urls')),
+    url('api/', include('myfilter.urls')),
 ]
