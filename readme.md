@@ -14,7 +14,15 @@ tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
 pip install -r requirements.txt
 ```
 
-安裝完套件就可以啟動 server。
+安裝完套件後複製 `.env.example` 的內容到 `.env`。
+
+>`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解就上傳了XDD
+
+```shell
+cp .env.example .env
+```
+
+最後一步，啟動 server。
 
 ```shell
 python manage.py runserver
