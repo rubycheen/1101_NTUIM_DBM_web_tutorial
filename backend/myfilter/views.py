@@ -31,16 +31,36 @@ def timetable_search(request):
         end_ = request.data['EndStation']
         date_ = request.data['OutWardSearchDate']
         time_ = request.data['OutWardSearchTime']
+
         start_id = Station.objects.filter(station_name=start_).values('station_id')[0]['station_id']
         end_id = Station.objects.filter(station_name=end_).values('station_id')[0]['station_id']
         weekday = datetime.datetime.strptime(date_, '%Y/%m/%d').strftime('%a').lower()
         search_time = datetime.datetime.strptime(date_, '%Y/%m/%d')
-        # 訂票五天前的00:00算早鳥
-        # hour, minute = [int(i) for i in time_.split(':')]
-        # search_time = search_time.replace(hour=hour, minute=minute)
-        
-        potential_tids = Train.objects.filter(starting_station_id__lte=start_id, ending_station_id__gte=end_id)
+        hour, minute = [int(i) for i in time_.split(':')]
+        search_time = search_time.replace(hour=hour, minute=minute)
 
+        # 訂票五天前的00:00算早鳥
+        if search_time < datetime.datetime.now():
+            return Response("Search time is expired.", status=status.HTTP_400_BAD_REQUEST)
+        
+
+        # raw sql example
+        """
+        query = f'''
+                SELECT *
+                FROM Train T
+                WHERE 
+                    T.starting_station_id <= %s AND
+                    T.ending_station_id >= %s AND 
+                    T.{weekday} = true;
+                '''
+        result = Train.objects.raw(query, [start_id, end_id])
+        potential_tids = []
+        for train in result:
+            potential_tids.append(train.train_id)
+        """
+
+        potential_tids = Train.objects.filter(starting_station_id__lte=start_id, ending_station_id__gte=end_id)
         if weekday == 'mon':
             potential_tids = potential_tids.filter(mon=True).values('train_id')
         elif weekday == 'tue':
@@ -57,6 +77,8 @@ def timetable_search(request):
             potential_tids = potential_tids.filter(sun=True).values('train_id')
 
         potential_tids = [tobj['train_id'] for tobj in potential_tids]
+
+
         
         schedules = Schedule.objects.filter(station_id__in=[start_id, end_id], train_id__in=potential_tids)
         schedules = schedules.values('train_id', 'station_id', 'arrival_time', 'departure_time')

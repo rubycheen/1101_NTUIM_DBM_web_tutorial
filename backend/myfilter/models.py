@@ -19,7 +19,6 @@ class Discount(models.Model):
     def __str__(self):
         return self.type
 
-
 class Fare(models.Model):
     fare_id = models.AutoField(primary_key=True)
     origin_station = models.ForeignKey('Station', on_delete=models.CASCADE, related_name='origin')
@@ -29,7 +28,7 @@ class Fare(models.Model):
     non_reserved_fare = models.FloatField()
 
     class Meta:
-        db_table = 'fare'
+        db_table = 'fare' #corresponded table name in DB, dufault value: myapp_classname
 
     def __str__(self):
         return f'{self.origin_station}2{self.destination_station}_fare'
