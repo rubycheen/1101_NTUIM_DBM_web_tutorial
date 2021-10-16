@@ -1,5 +1,6 @@
-# 使用說明
 
+
+# 使用說明
 ## Backend 
 ```shell
 cd backend
@@ -8,10 +9,28 @@ source tutorial-env/bin/activate #啟動虛擬環境 for mac
 tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
-成功的話，command prompt 前面應該會多出 `(tutorial-env)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 deactivate。接著輸入所需套件，需要的套件與版本已定義在 `requirements.txt`，因此僅需要需入一行指令。
+成功的話，command prompt 前面應該會多出 `(tutorial-env)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
+接著下載所需套件，需要的套件與版本已定義在 `requirements.txt`，下載完輸入`pip list`檢查所有用 `pip` 下載的套件。
 
 ```shell
+python -m pip install --upgrade pip #pip更新至最新版本
 pip install -r requirements.txt
+
+```
+```
+Package             Version
+------------------- -------
+asgiref             3.4.1
+dj-database-url     0.5.0
+Django              3.2.6
+django-cors-headers 3.8.0
+djangorestframework 3.12.4
+pip                 21.3
+psycopg2            2.9.1
+python-decouple     3.4
+pytz                2021.1
+setuptools          47.1.0
+sqlparse            0.4.1
 ```
 
 安裝完套件後複製 `.env.example` 的內容到 `.env`。
@@ -20,6 +39,15 @@ pip install -r requirements.txt
 
 ```shell
 cp .env.example .env
+```
+
+接著可以將 `.env` 當中的變數改成符合你電腦資料庫的值。
+
+```shell
+SECRET_KEY={aaaaaaaaa}
+DEBUG=True
+ALLOWED_HOSTS=.localhost,127.0.0.1
+DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```
 
 最後一步，啟動 server。

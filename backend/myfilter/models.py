@@ -14,7 +14,7 @@ class Discount(models.Model):
     discount_rate = models.FloatField(blank=True, null=True)
 
     class Meta:
-        db_table = 'discount'
+        db_table = 'THSR"."discount'
 
     def __str__(self):
         return self.type
@@ -28,7 +28,7 @@ class Fare(models.Model):
     non_reserved_fare = models.FloatField()
 
     class Meta:
-        db_table = 'fare' #corresponded table name in DB, dufault value: myapp_classname
+        db_table = 'THSR"."fare' #corresponded table name in DB, dufault value: myapp_classname
 
     def __str__(self):
         return f'{self.origin_station}2{self.destination_station}_fare'
@@ -43,7 +43,7 @@ class Schedule(models.Model):
     departure_time = models.TextField(blank=True, null=True)
 
     class Meta:
-        db_table = 'schedule'
+        db_table = 'THSR"."schedule'
 
     def __str__(self):
         return f'{self.train}_{self.station}'
@@ -54,7 +54,7 @@ class Station(models.Model):
     station_name = models.TextField()
 
     class Meta:
-        db_table = 'station'
+        db_table = 'THSR"."station'
     
     def __str__(self):
         return self.station_name
@@ -73,7 +73,7 @@ class Train(models.Model):
     sun = models.BooleanField()
 
     class Meta:
-        db_table = 'train'
+        db_table = 'THSR"."train'
 
     def __str__(self):
         return f'{self.starting_station}2{self.ending_station}_train_info'

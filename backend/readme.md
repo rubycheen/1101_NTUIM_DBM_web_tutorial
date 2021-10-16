@@ -1,6 +1,10 @@
 ## Tutorial
 ##  Backend
 
+補：
+.env 內的資訊
+修改 main readme 的順序，db,be,fe
+
 ### 後端架構
 ```
 |-- backend
@@ -114,3 +118,6 @@ class Fare(models.Model):
 - [官方文件](https://docs.djangoproject.com/en/3.2/topics/db/sql/)有大概講到orm與raw sql比較
 - 兩種方法執行 raw SQL，看上面官方
 - [FAQ: Databases and models](https://docs.djangoproject.com/en/3.2/faq/models/):重要！投影片要統整給大家
+
+- ORM vs SQL
+    - SQL 出來是 result set（是 table 還要 select column 之類的），ORM 出來是 object 可以直接用？
