@@ -65,7 +65,10 @@ yarn start
 
 ## Database
 
-下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/)(GUI介面)
+- 下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/)(GUI介面)
+- db 資料夾裡有四個 sql 檔案，名稱裡有 empty 的代表為空 table 無資料的備份檔，其他兩份是有資料的備份檔
+- `requests_tutorial.ipynb`是生資料/抓資料的教學檔
+- `de_init.ipynb`則示範如何把資料塞到 table 裡
 
 * [Postgres setup on MacOS](https://www.youtube.com/watch?v=EZAa0LSxPPU)
 * [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
