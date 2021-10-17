@@ -1,8 +1,7 @@
 
 
 # 使用說明
-## Backend 
-
+## Backend
 ```shell
 cd backend
 python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
@@ -51,14 +50,14 @@ ALLOWED_HOSTS=.localhost,127.0.0.1
 DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```
 
-最後，同步資料庫並啟動 server。
+最後，同步資料庫並啟動 backend server。
 
 ```shell
 python manage.py migrate
 python manage.py runserver
 ```
 
-用瀏覽器打開 `http://127.0.0.1:8000/api/stations`，如果有順利拿到資源表示後端起成功。
+用瀏覽器打開 http://127.0.0.1:8000/api/stations，如果有順利拿到資源表示後端起成功。
 ![](img/api.png)
 
 ## Frontend
