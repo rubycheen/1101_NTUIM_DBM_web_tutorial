@@ -76,4 +76,4 @@ class Train(models.Model):
         db_table = 'THSR"."train'
 
     def __str__(self):
-        return f'{self.starting_station}2{self.ending_station}_train_info'
+        return f'{self.starting_station}2{self.ending_station}_{self.wed}'

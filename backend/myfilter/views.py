@@ -38,29 +38,19 @@ def timetable_search(request):
         search_time = datetime.datetime.strptime(date_, '%Y/%m/%d')
         hour, minute = [int(i) for i in time_.split(':')]
         search_time = search_time.replace(hour=hour, minute=minute)
+        is_northward = True if start_id < end_id else False
+        print(f"weekday: {weekday}, search_time: {search_time}, start_id: {start_id}, end_id: {end_id}, is_northward: {is_northward}")
 
-        # 訂票五天前的00:00算早鳥
         if search_time < datetime.datetime.now():
             return Response("Search time is expired.", status=status.HTTP_400_BAD_REQUEST)
-        
 
-        # raw sql example
-        """
-        query = f'''
-                SELECT *
-                FROM Train T
-                WHERE 
-                    T.starting_station_id <= %s AND
-                    T.ending_station_id >= %s AND 
-                    T.{weekday} = true;
-                '''
-        result = Train.objects.raw(query, [start_id, end_id])
-        potential_tids = []
-        for train in result:
-            potential_tids.append(train.train_id)
-        """
+        # 找出有行經 start_station 到 end_station 的車次存在 potential_tids
+        potential_tids = None
+        if is_northward:
+            potential_tids = Train.objects.filter(starting_station_id__lte=start_id, ending_station_id__gte=end_id)
+        else:
+            potential_tids = Train.objects.filter(starting_station_id__gte=start_id, ending_station_id__lte=end_id)
 
-        potential_tids = Train.objects.filter(starting_station_id__lte=start_id, ending_station_id__gte=end_id)
         if weekday == 'mon':
             potential_tids = potential_tids.filter(mon=True).values('train_id')
         elif weekday == 'tue':
@@ -75,26 +65,33 @@ def timetable_search(request):
             potential_tids = potential_tids.filter(sat=True).values('train_id')
         elif weekday == 'sun':
             potential_tids = potential_tids.filter(sun=True).values('train_id')
-
         potential_tids = [tobj['train_id'] for tobj in potential_tids]
-
-
         
         schedules = Schedule.objects.filter(station_id__in=[start_id, end_id], train_id__in=potential_tids)
         schedules = schedules.values('train_id', 'station_id', 'arrival_time', 'departure_time')
+        # Each train_id, each with a count of station_id as a "tid_cnt" attribute. If "tid_cnt" >= 2 then this train_id stops by both start and end stations.
         two_schedules = schedules.values('train_id').annotate(tid_cnt=Count('station_id')).filter(tid_cnt__gt=1).values('train_id')
         two_schedule_ids = [s['train_id'] for s in two_schedules]
         schedules = schedules.filter(train_id__in=two_schedule_ids)
 
+
         result = []
         for _id, (start, end) in enumerate(zip(schedules[::2], schedules[1::2]), start=1):
+            data = {}
             
-            data = {'key': _id}
-            
-            start_time = datetime.datetime.strptime(start['departure_time'], '%H:%M')
+            date_str = search_time.strftime("%d/%B/%Y")
+            start_time = datetime.datetime.strptime(f"{date_str} {start['departure_time']}", '%d/%B/%Y %H:%M')
             end_time = datetime.datetime.strptime(end['arrival_time'], '%H:%M')
+            
             spend = (end_time - start_time).seconds // 60
             current_time = datetime.datetime.now()
+
+            # The departure_time should be later than search_time
+            if start_time <= search_time:
+                continue
+
+            # print(start['train_id'], start['departure_time'], end['train_id'], end['arrival_time'])
+            # print(Train.objects.filter(train_id=start['train_id']).get())
 
             data['startTime'] = start['departure_time']
             data['arrivalTime'] = end['arrival_time']
@@ -113,7 +110,15 @@ def timetable_search(request):
 
             result.append(data)
 
-        return Response(result, status=status.HTTP_200_OK)
+        # sort by startTime
+        result = sorted(result, key=lambda d: d['startTime'])
+        # add key
+        new_result = []
+        for i, d in enumerate(result, start=1):
+            d.setdefault('key',i)
+            new_result.append(d)
+
+        return Response(new_result, status=status.HTTP_200_OK)
         
 
 @api_view(['POST'])
