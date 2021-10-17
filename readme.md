@@ -1,6 +1,30 @@
+# 台灣高鐵時刻與票價查詢
+### Contributors
+- 吳琦艾 Database schema design, data colleciton and process using postgreSQL 
+- 鄭亦辰 Back-end using Django
+- 陳姵如 Front-end using ReactJS
+
+## Database
+
+- 下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/) (GUI介面)
+- db 資料夾裡有四個 sql 檔案，名稱裡有 empty 的代表為空 table 無資料的備份檔，其他兩份是有資料的備份檔
+- `requests_tutorial.ipynb`是生資料/抓資料的教學檔
+- `de_init.ipynb`則示範如何把資料塞到 table 裡
+
+* [Postgres setup on MacOS](https://www.youtube.com/watch?v=EZAa0LSxPPU)
+* [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
 
 
-# 使用說明
+### API
+- **討論文件**：https://hackmd.io/_vPVxhaGRT6TIeWEMzvgWA
+- **API endpoint**: http://127.0.0.1:8000/api
+- **三個接口**
+    >GET /stations
+
+    >POST /timetable/search
+
+    >POST /ticket/search
+
 ## Backend
 ```shell
 cd backend
@@ -61,28 +85,19 @@ python manage.py runserver
 ![](img/api.png)
 
 ## Frontend
+
+- 第一次開啟專案請先用以下指令安裝所有需要的 packages。
+
+```shell
+cd frontend
+yarn
+```
+
+- 開啟前端
 ```shell
 cd frontend
 yarn start
 ```
-
-## Database
-
-- 下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/)(GUI介面)
-- db 資料夾裡有四個 sql 檔案，名稱裡有 empty 的代表為空 table 無資料的備份檔，其他兩份是有資料的備份檔
-- `requests_tutorial.ipynb`是生資料/抓資料的教學檔
-- `de_init.ipynb`則示範如何把資料塞到 table 裡
-
-* [Postgres setup on MacOS](https://www.youtube.com/watch?v=EZAa0LSxPPU)
-* [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
+- 用瀏覽器打開 http://127.0.0.1:3000/ 。
 
 
-# API
-- **討論文件**：[連結](https://hackmd.io/_vPVxhaGRT6TIeWEMzvgWA)
-- **API endpoint**: http://127.0.0.1:8000/api
-- **三個接口**
-    >GET /stations
-
-    >POST /timetable/search
-
-    >POST /ticket/search
