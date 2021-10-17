@@ -27,10 +27,20 @@
     >POST /ticket/search
 
 ## Backend
+
+確定電腦有安裝 `python3` 以及完成上述資料匯入資料庫的指令後打開終端機執行以下指令：
+
 ```shell
+# for mac
 cd backend
 python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
 source tutorial-env/bin/activate #啟動虛擬環境 for mac
+```
+
+```shell
+# for windows
+cd backend
+python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
 tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
@@ -63,7 +73,13 @@ sqlparse            0.4.1
 >`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解上傳，同學們實作專案時記得避免。
 
 ```shell
+# for mac
 cp .env.example .env
+```
+
+```shell
+# for windows
+copy .env.example .env
 ```
 
 接著可以將 `.env` 當中的變數改成符合你電腦資料庫的值。
@@ -82,7 +98,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-用瀏覽器打開 http://127.0.0.1:8000/api/stations，如果有順利拿到資源表示後端起成功。
+用瀏覽器打開  http://127.0.0.1:8000/api/stations ，如果有順利拿到資源表示後端起成功。
 ![](img/api.png)
 
 ## Frontend
