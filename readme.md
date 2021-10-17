@@ -87,6 +87,9 @@ python manage.py runserver
 
 ## Frontend
 
+#### Step 0. 安裝 yarn
+如果你還沒有安裝 yarn，請參考官網 https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable ，依照步驟安裝。
+
 #### Step 1. 安裝 packages
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
 ```shell
