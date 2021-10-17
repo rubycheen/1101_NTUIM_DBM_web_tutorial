@@ -1,15 +1,16 @@
 # 台灣高鐵時刻與票價查詢
+輸入起訖站以及出發日期與時間查詢適用高鐵車次與適用優惠
+
 ### Contributors
 - 吳琦艾 Database schema design, data colleciton and process using postgreSQL 
 - 鄭亦辰 Back-end using Django
 - 陳姵如 Front-end using ReactJS
-
 ## Database
 
 - 下載 [PostgreSQL 13](https://www.postgresql.org/download/) 以及 [pdAdmin](https://www.pgadmin.org/) (GUI介面)
-- db 資料夾裡有四個 sql 檔案，名稱裡有 empty 的代表為空 table 無資料的備份檔，其他兩份是有資料的備份檔
-- `requests_tutorial.ipynb`是生資料/抓資料的教學檔
-- `de_init.ipynb`則示範如何把資料塞到 table 裡
+- db 資料夾裡有四個 sql 檔案，名稱裡有 empty 的代表為空 table 無資料的備份檔，其他兩份是有資料的備份檔。
+- `requests_tutorial.ipynb` 是生資料及抓資料的教學檔。
+- `de_init.ipynb` 示範如何把資料塞到 table 裡。
 
 * [Postgres setup on MacOS](https://www.youtube.com/watch?v=EZAa0LSxPPU)
 * [匯入/匯出現有資料庫 by pdAdmin](https://www.youtube.com/watch?v=C30q5i1e9KE)
@@ -59,7 +60,7 @@ sqlparse            0.4.1
 
 安裝完套件後複製 `.env.example` 的內容到 `.env`。
 
->`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解就上傳了XDD
+>`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解上傳，同學們實作專案時記得避免。
 
 ```shell
 cp .env.example .env
@@ -86,18 +87,25 @@ python manage.py runserver
 
 ## Frontend
 
-- 第一次開啟專案請先用以下指令安裝所有需要的 packages。
+第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
 
 ```shell
 cd frontend
 yarn
 ```
 
-- 開啟前端
+開啟前端
 ```shell
 cd frontend
 yarn start
 ```
-- 用瀏覽器打開 http://127.0.0.1:3000/ 。
+用瀏覽器開啟 http://127.0.0.1:3000/ ，看到以下畫面即成功開啟此專案。
+
+#### 查詢選單
+![截圖 2021-10-17 下午10 53 03](https://user-images.githubusercontent.com/56534481/137632819-dfc1e96b-7a0b-4086-92fe-33ec2bd48c66.png)
+#### 車次時刻與適用優惠列表
+![截圖 2021-10-17 下午10 55 38](https://user-images.githubusercontent.com/56534481/137632908-d0b43156-b165-4858-8930-9734e7f4d5ca.png)
+#### 票價試算
+![截圖 2021-10-17 下午10 56 13](https://user-images.githubusercontent.com/56534481/137632935-88a6ca29-d65c-46be-9853-eb09fb4e91f2.png)
 
 
