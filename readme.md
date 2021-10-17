@@ -87,19 +87,20 @@ python manage.py runserver
 
 ## Frontend
 
+#### Step 1. 安裝 packages
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
-
 ```shell
 cd frontend
 yarn
 ```
 
-開啟前端
+#### Step 2. 開啟前端
 ```shell
 cd frontend
 yarn start
 ```
-用瀏覽器開啟 http://127.0.0.1:3000/ ，看到以下畫面即成功開啟此專案。
+#### Step 3. 開啟瀏覽器 
+一般情況會自動開啟瀏覽器，若沒有請手動開啟 http://127.0.0.1:3000/ ，看到以下畫面即代表成功開啟前端且前後端連接成功。
 
 #### 查詢選單
 ![截圖 2021-10-17 下午10 53 03](https://user-images.githubusercontent.com/56534481/137632819-dfc1e96b-7a0b-4086-92fe-33ec2bd48c66.png)
