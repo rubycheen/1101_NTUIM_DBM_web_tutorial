@@ -1,7 +1,7 @@
 # 台灣高鐵時刻與票價查詢
 輸入起訖站以及出發日期與時間查詢適用高鐵車次與適用優惠
 
-### Contributors
+### Contributors & Tasks
 - 吳琦艾 Database schema design, data colleciton and process using postgreSQL 
 - 鄭亦辰 Back-end using Django
 - 陳姵如 Front-end using ReactJS
