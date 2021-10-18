@@ -13,24 +13,24 @@ import datetime
 @api_view(['GET'])
 def station_list(request):
     if request.method == 'GET':
-        stations = Station.objects.all() #這邊用的 queryset 就是 ORM
+        stations = Station.objects.all()
         serializer = StationListSerializer(stations, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # elif request.method == 'POST':
-    #     serializer = StationSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def timetable_search(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+    
     if request.method == 'POST':
-        start_ = request.data['StartStation']
-        end_ = request.data['EndStation']
-        date_ = request.data['OutWardSearchDate']
-        time_ = request.data['OutWardSearchTime']
+        try:
+            start_ = request.data['StartStation']
+            end_ = request.data['EndStation']
+            date_ = request.data['OutWardSearchDate']
+            time_ = request.data['OutWardSearchTime']
+        except KeyError:
+            return Response("4 parameters are all required.(StartStation,EndStation,OutWardSearchDate,OutWardSearchTime)", status=status.HTTP_400_BAD_REQUEST)
 
         start_id = Station.objects.filter(station_name=start_).values('station_id')[0]['station_id']
         end_id = Station.objects.filter(station_name=end_).values('station_id')[0]['station_id']
@@ -117,16 +117,22 @@ def timetable_search(request):
         for i, d in enumerate(result, start=1):
             d.setdefault('key',i)
             new_result.append(d)
-
         return Response(new_result, status=status.HTTP_200_OK)
         
 
 @api_view(['POST'])
 def ticket_search(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
     if request.method == 'POST':
-        start_ = request.data['StartStation']
-        end_ = request.data['EndStation']
-        date_ = request.data['OutWardSearchDate']
+        try:
+            start_ = request.data['StartStation']
+            end_ = request.data['EndStation']
+            date_ = request.data['OutWardSearchDate']
+        except KeyError:
+            return Response("3 parameters are all required.(StartStation,EndStation,OutWardSearchDate)", status=status.HTTP_400_BAD_REQUEST)
+            
         start_id = Station.objects.filter(station_name=start_).values('station_id')[0]['station_id']
         end_id = Station.objects.filter(station_name=end_).values('station_id')[0]['station_id']
         weekday = datetime.datetime.strptime(date_, '%Y/%m/%d').strftime('%a').lower()
@@ -152,4 +158,3 @@ def ticket_search(request):
         
         return Response(result, status=status.HTTP_200_OK)
         
-        # return Response("Temp Error", status=status.HTTP_400_BAD_REQUEST)
