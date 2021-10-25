@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from myfilter.models import Discount, Fare, Schedule, Station, Train
-from myfilter.serializers import StationListSerializer
 
 from django.db.models import Count
 import datetime
@@ -13,9 +12,8 @@ import datetime
 @api_view(['GET'])
 def station_list(request):
     if request.method == 'GET':
-        stations = Station.objects.all()
-        serializer = StationListSerializer(stations, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        stations = list(Station.objects.values())
+        return Response(stations, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -141,7 +139,7 @@ def ticket_search(request):
         discounts = Discount.objects.all()
         discount_rates = {}
         for dr in discounts:
-            discount_rates[dr.type] = dr.discount_rate
+            discount_rates[dr.type_name] = dr.discount_rate
 
         result = []
         category_name = {'business_fare': '商務車廂', 'standard_fare':'標準車廂', 'non_reserved_fare':'自由座車廂'}
