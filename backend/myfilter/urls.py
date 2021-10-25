@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import path
 from myfilter import views
 
 urlpatterns = [
-    url('stations', views.station_list),
-    url('timetable/search', views.timetable_search),
-    url('ticket/search', views.ticket_search)
+    path('stations', views.station_list),
+    path('timetable/search', views.timetable_search),
+    path('ticket/search', views.ticket_search)
 ]
