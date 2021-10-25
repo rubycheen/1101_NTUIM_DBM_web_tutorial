@@ -10,14 +10,15 @@ from django.db import models
 
 class Discount(models.Model):
     discount_id = models.AutoField(primary_key=True)
-    type = models.TextField()
+    type_name = models.TextField(db_column='type')
     discount_rate = models.FloatField(blank=True, null=True)
 
     class Meta:
         db_table = 'THSR"."discount'
 
     def __str__(self):
-        return self.type
+        return self.type_name
+
 
 class Fare(models.Model):
     fare_id = models.AutoField(primary_key=True)
